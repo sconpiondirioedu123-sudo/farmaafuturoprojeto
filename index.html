@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FarmaFuturo | Unidade Oficial</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-[#0b0f13] text-white auth-open">
+
+  <div id="auth-screen" class="fixed inset-0 z-[300] bg-[#0b0f13] flex items-center justify-center p-4 md:p-8">
+    <div class="bg-[#12181f] border border-white/10 w-full max-w-md rounded-[40px] md:rounded-[50px] p-8 md:p-12 text-center shadow-2xl">
+      <div class="bg-[#00f294] text-black w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-2xl md:rounded-3xl font-black text-2xl md:text-3xl italic mx-auto mb-6 md:mb-8 shadow-lg shadow-[#00f294]/20">F</div>
+      <h2 class="text-xl md:text-2xl font-black uppercase italic mb-6 md:mb-8 tracking-tighter text-[#00f294]">Acesso a Farmácia Virtual</h2>
+      <div class="space-y-3 md:space-y-4">
+        <input type="email" id="auth-email" class="w-full bg-white/5 border border-white/10 rounded-2xl p-4 md:p-5 outline-none focus:border-[#00f294] transition text-sm font-bold" placeholder="E-MAIL">
+        <input type="password" id="auth-pass" class="w-full bg-white/5 border border-white/10 rounded-2xl p-4 md:p-5 outline-none focus:border-[#00f294] transition text-sm font-bold" placeholder="SENHA">
+        <button onclick="handleLogin()" class="w-full bg-[#00f294] text-black font-black py-4 md:py-5 rounded-2xl uppercase italic shadow-lg hover:scale-[1.02] transition text-sm md:text-base mt-2">Entrar na Unidade</button>
+      </div>
+    </div>
+  </div>
+
+  <header class="border-b border-white/5 bg-[#0b0f13]/80 backdrop-blur-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2 md:gap-3">
+        <div class="bg-[#00f294] text-black p-2 rounded-xl font-black text-lg md:text-xl italic">F</div>
+        <h1 class="font-black text-lg md:text-xl tracking-tighter uppercase italic hidden md:block">FarmaFuturo</h1>
+      </div>
+      <div class="flex items-center gap-3 md:gap-4">
+        <button onclick="openHistory()" class="p-2 md:p-3 bg-white/5 rounded-xl md:rounded-2xl border border-white/10 hover:border-[#00f294] transition">
+          <i data-lucide="clock" size="20"></i>
+        </button>
+        <button onclick="toggleCart()" class="relative p-2 md:p-3 bg-white/5 rounded-xl md:rounded-2xl border border-white/10 hover:border-[#00f294] transition">
+          <i data-lucide="shopping-cart" size="20"></i>
+          <span id="cart-count" class="absolute -top-1 -right-1 bg-[#00f294] text-black text-[9px] font-black px-1.5 py-0.5 rounded-full hidden">0</span>
+        </button>
+        <button onclick="toggleProfileMenu()" class="flex items-center gap-2 md:gap-3 bg-white/5 p-1 pr-3 md:pr-4 rounded-xl md:rounded-2xl border border-white/10 hover:border-[#00f294] transition">
+          <img src="img/imageprivate.webp" class="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl object-cover border-2 border-[#00f294]">
+          <div class="text-left hidden lg:block">
+            <p class="text-[9px] font-black uppercase text-[#00f294]">Status: Online</p>
+            <p class="text-xs font-bold text-white uppercase user-name-display truncate max-w-[80px]">Visitante</p>
+          </div>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="container mx-auto px-4 pt-6 md:pt-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+      <div class="lg:col-span-2 relative rounded-[30px] md:rounded-[40px] border border-white/5 overflow-hidden bg-[#12181f] p-8 md:p-24 flex items-center">
+        <div class="relative z-10">
+          <h2 class="text-4xl md:text-7xl font-black uppercase italic tracking-tighter leading-none mb-4 md:mb-6">Vitaminas<br><span class="text-[#00f294]">30% OFF</span></h2>
+          <p class="text-gray-400 font-bold uppercase italic text-xs md:text-sm">Ofertas válidas até o fim do estoque.</p>
+        </div>
+        <i data-lucide="zap" class="absolute right-4 md:right-10 text-[#00f294] opacity-10" size="140"></i>
+      </div>
+      <div class="bg-blue-600 rounded-[30px] md:rounded-[40px] p-8 md:p-10 flex flex-col justify-between relative overflow-hidden min-h-[180px]">
+        <h3 class="text-2xl md:text-3xl font-black uppercase italic leading-tight">Entrega<br>Grátis <span class="text-black/50">Hoje</span></h3>
+        <p class="text-[9px] md:text-[10px] font-black uppercase bg-black/20 w-fit px-3 py-1 mt-4 md:mt-0 rounded-full text-white">Cupom: FRETE24</p>
+        <i data-lucide="truck" class="absolute -right-4 -bottom-4 text-white opacity-20" size="100"></i>
+      </div>
+    </div>
+  </section>
+
+  <section class="container mx-auto px-4 py-6 md:py-8">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+      <div class="bg-white/5 border border-white/5 p-3 md:p-4 rounded-2xl md:rounded-3xl flex items-center gap-3 md:gap-4">
+        <div class="bg-[#00f294]/20 p-2 md:p-3 rounded-xl md:rounded-2xl"><i data-lucide="clock" class="text-[#00f294] w-4 h-4 md:w-5 md:h-5"></i></div>
+        <p class="text-[8px] md:text-[9px] font-black uppercase italic leading-tight">Entrega em<br>30 Minutos</p>
+      </div>
+      <div class="bg-white/5 border border-white/5 p-3 md:p-4 rounded-2xl md:rounded-3xl flex items-center gap-3 md:gap-4">
+        <div class="bg-blue-500/20 p-2 md:p-3 rounded-xl md:rounded-2xl"><i data-lucide="shield-check" class="text-blue-500 w-4 h-4 md:w-5 md:h-5"></i></div>
+        <p class="text-[8px] md:text-[9px] font-black uppercase italic leading-tight">Produtos<br>Originais</p>
+      </div>
+      <div class="bg-white/5 border border-white/5 p-3 md:p-4 rounded-2xl md:rounded-3xl flex items-center gap-3 md:gap-4">
+        <div class="bg-purple-500/20 p-2 md:p-3 rounded-xl md:rounded-2xl"><i data-lucide="phone-call" class="text-purple-500 w-4 h-4 md:w-5 md:h-5"></i></div>
+        <p class="text-[8px] md:text-[9px] font-black uppercase italic leading-tight">Suporte<br>Especializado</p>
+      </div>
+      <div class="bg-white/5 border border-white/5 p-3 md:p-4 rounded-2xl md:rounded-3xl flex items-center gap-3 md:gap-4">
+        <div class="bg-orange-500/20 p-2 md:p-3 rounded-xl md:rounded-2xl"><i data-lucide="credit-card" class="text-orange-500 w-4 h-4 md:w-5 md:h-5"></i></div>
+        <p class="text-[8px] md:text-[9px] font-black uppercase italic leading-tight">Pagamento<br>Facilitado</p>
+      </div>
+    </div>
+  </section>
+
+  <main class="container mx-auto px-4 py-4 md:py-6">
+
+    <div class="mb-6 md:mb-8 bg-[#12181f] border border-white/5 rounded-2xl md:rounded-3xl p-3 md:p-4 flex flex-col md:flex-row gap-3 md:gap-4 items-center">
+      <div class="bg-[#00f294]/20 p-3 rounded-2xl hidden md:block"><i data-lucide="sparkles" class="text-[#00f294]"></i></div>
+      <input type="text" id="ia-search-input" autocomplete="off" class="w-full bg-transparent outline-none text-sm font-bold italic text-white placeholder-gray-500 px-2" placeholder="IA: DIGITE UM SINTOMA OU PALAVRA-CHAVE (EX: FEBRE, CÓLICA)...">
+      <button onclick="buscarComIA()" class="w-full md:w-auto bg-[#00f294] text-black font-black px-6 md:px-8 py-3 md:py-4 rounded-xl md:rounded-2xl uppercase italic hover:scale-105 transition whitespace-nowrap shadow-lg shadow-[#00f294]/20 text-xs md:text-sm">Buscar com IA</button>
+    </div>
+
+    <div class="flex gap-3 md:gap-4 overflow-x-auto pb-6 md:pb-10 no-scrollbar justify-start md:justify-center">
+      <button onclick="filterCat('Todos', this)" class="filter-btn active">Todos</button>
+      <button onclick="filterCat('Medicamentos', this)" class="filter-btn">Medicamentos</button>
+      <button onclick="filterCat('Higiene', this)" class="filter-btn">Higiene</button>
+      <button onclick="filterCat('Bem-Estar', this)" class="filter-btn">Bem-Estar</button>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6" id="product-grid"></div>
+  </main>
+
+  <section class="container mx-auto px-4 py-6 md:py-8 mb-8 md:mb-12">
+    <div class="bg-[#12181f] border border-white/5 rounded-[30px] md:rounded-[40px] p-6 md:p-16 flex flex-col lg:flex-row gap-8 md:gap-10 items-center">
+      <div class="w-full lg:w-1/2">
+        <div class="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
+          <div class="bg-blue-500/20 p-3 md:p-4 rounded-xl md:rounded-2xl"><i data-lucide="stethoscope" class="text-blue-500 w-6 h-6 md:w-8 md:h-8"></i></div>
+          <h2 class="text-2xl md:text-3xl font-black uppercase italic tracking-tighter text-white">Fale com o<br><span class="text-blue-500">Farmacêutico</span></h2>
+        </div>
+        <p class="text-gray-400 text-[10px] md:text-xs italic font-bold uppercase mb-4 md:mb-8 leading-relaxed">Envie seus sintomas ou dúvidas. Nossa equipe técnica avaliará seu caso em até 5 minutos para garantir a segurança da sua medicação.</p>
+      </div>
+      <div class="w-full lg:w-1/2 bg-[#0b0f13] border border-white/10 p-6 md:p-8 rounded-[20px] md:rounded-[30px] shadow-2xl">
+        <textarea id="sintomas-input" class="w-full bg-white/5 border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-5 text-xs md:text-sm font-bold h-28 md:h-32 mb-4 outline-none focus:border-blue-500 transition resize-none" placeholder="O que você está sentindo? Ex: dor de cabeça, febre..."></textarea>
+        <button onclick="enviarSintomas()" class="w-full bg-blue-500 text-white font-black py-4 md:py-5 rounded-xl md:rounded-2xl uppercase italic shadow-lg shadow-blue-500/20 hover:scale-[1.02] transition text-xs md:text-sm">Enviar para Análise</button>
+        <div id="res-sintomas" class="hidden mt-4 p-4 rounded-xl text-[9px] md:text-[10px] font-black uppercase italic text-center transition-all duration-300"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-[#0b0f13] border-t border-white/5 pt-16 md:pt-24 pb-8 md:pb-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-16 mb-12 md:mb-20">
+        <div>
+          <div class="flex items-center gap-3 mb-6 md:mb-8">
+            <div class="bg-[#00f294] text-black p-2 rounded-xl font-black text-xl italic">F</div>
+            <h3 class="font-black text-white text-xl md:text-2xl uppercase italic tracking-tighter">FarmaFuturo</h3>
+          </div>
+          <p class="text-gray-400 text-[10px] md:text-xs italic leading-relaxed mb-8">Tecnologia avançada em logística farmacêutica para entregar o que você precisa em minutos.</p>
+        </div>
+        <div>
+          <h4 class="text-[#00f294] font-black uppercase text-xs md:text-sm mb-6 md:mb-8 italic tracking-widest underline decoration-2 underline-offset-8">Categorias</h4>
+          <ul class="space-y-3 md:space-y-4 text-gray-500 text-[9px] md:text-[10px] font-black uppercase italic">
+            <li><a href="#" class="hover:text-white transition">Analgésicos</a></li>
+            <li><a href="#" class="hover:text-white transition">Vitaminas e Suplementos</a></li>
+            <li><a href="#" class="hover:text-white transition">Cuidados Pessoais</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-[#00f294] font-black uppercase text-xs md:text-sm mb-6 md:mb-8 italic tracking-widest underline decoration-2 underline-offset-8">Institucional</h4>
+          <ul class="space-y-3 md:space-y-4 text-gray-500 text-[9px] md:text-[10px] font-black uppercase italic">
+            <li><a href="#" class="hover:text-white transition">Sobre Nós</a></li>
+            <li><a href="#" class="hover:text-white transition">Política de Privacidade</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-[#00f294] font-black uppercase text-xs md:text-sm mb-6 md:mb-8 italic tracking-widest underline decoration-2 underline-offset-8">Pagamento</h4>
+          <div class="grid grid-cols-2 gap-3 mb-6">
+            <div class="bg-white/5 border border-white/10 p-3 rounded-xl md:rounded-2xl flex items-center justify-center gap-2">
+              <i data-lucide="qr-code" class="text-[#00f294] w-4 h-4 md:w-5 md:h-5"></i>
+              <span class="text-[8px] md:text-[9px] font-black uppercase italic">PIX</span>
+            </div>
+            <div class="bg-white/5 border border-white/10 p-3 rounded-xl md:rounded-2xl flex items-center justify-center gap-2">
+              <i data-lucide="credit-card" class="text-blue-500 w-4 h-4 md:w-5 md:h-5"></i>
+              <span class="text-[8px] md:text-[9px] font-black uppercase italic">CARD</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-600 text-[8px] md:text-[9px] font-bold uppercase italic tracking-widest gap-4 md:gap-0 text-center md:text-left">
+        <p>© 2026 FarmaFuturo. CNPJ: 00.000.000/0001-00</p>
+        <p>Responsável Técnico: Dr. João Silva - CRF/SP 00000</p>
+      </div>
+    </div>
+  </footer>
+
+  <div id="modal-product" class="fixed inset-0 z-[150] hidden flex items-end md:items-center justify-center p-0 md:p-4">
+    <div class="absolute inset-0 bg-black/95 backdrop-blur-md" onclick="closeModals()"></div>
+    <div class="bg-[#12181f] border border-white/10 w-full max-w-5xl md:rounded-[50px] rounded-t-[40px] rounded-b-none relative z-10 overflow-hidden flex flex-col md:flex-row max-h-[90vh] md:max-h-none overflow-y-auto" id="modal-content"></div>
+  </div>
+
+  <div id="modal-cart" class="fixed inset-0 z-[140] hidden flex items-end md:items-center justify-center p-0 md:p-4">
+    <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="closeModals()"></div>
+    <div class="bg-[#12181f] border border-white/10 w-full max-w-xl md:rounded-[40px] rounded-t-[30px] rounded-b-none relative z-10 p-6 md:p-8 max-h-[90vh]">
+      <div class="w-12 h-1 bg-white/20 rounded-full mx-auto mb-6 md:hidden"></div>
+      <h2 class="text-xl md:text-2xl font-black uppercase italic text-[#00f294] mb-6 md:mb-8">Meu Carrinho</h2>
+      <div id="cart-items" class="space-y-3 md:space-y-4 mb-6 md:mb-8 max-h-[40vh] overflow-y-auto no-scrollbar"></div>
+      <div class="border-t border-white/5 pt-4 md:pt-6 flex justify-between items-end mb-4 md:mb-8">
+        <div>
+          <p class="text-[9px] md:text-[10px] font-black text-gray-500 uppercase">Subtotal</p>
+          <p id="cart-total" class="text-2xl md:text-3xl font-black text-[#00f294]">R$ 0,00</p>
+        </div>
+        <button onclick="checkout()" class="bg-[#00f294] text-black font-black px-6 md:px-10 py-3 md:py-4 rounded-xl md:rounded-2xl uppercase italic text-xs md:text-sm">Finalizar Pedido</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-history" class="fixed inset-0 z-[160] hidden flex items-end md:items-center justify-center p-0 md:p-4">
+    <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="closeModals()"></div>
+    <div class="bg-[#12181f] border border-white/10 w-full max-w-2xl md:rounded-[40px] rounded-t-[30px] rounded-b-none relative z-10 p-6 md:p-8 max-h-[80vh] overflow-y-auto no-scrollbar">
+      <div class="w-12 h-1 bg-white/20 rounded-full mx-auto mb-6 md:hidden"></div>
+      <h2 class="text-xl md:text-2xl font-black uppercase italic text-[#00f294] mb-6 md:mb-8">Pedidos Recentes</h2>
+      <div id="history-items" class="space-y-3 md:space-y-4"></div>
+    </div>
+  </div>
+
+  <div id="modal-edit-profile" class="fixed inset-0 z-[170] hidden flex items-end md:items-center justify-center p-0 md:p-4">
+    <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="closeModals()"></div>
+    <div class="bg-[#12181f] border border-white/10 w-full max-w-md md:rounded-[40px] rounded-t-[30px] rounded-b-none relative z-10 p-6 md:p-10 max-h-[90vh] overflow-y-auto no-scrollbar">
+      <div class="w-12 h-1 bg-white/20 rounded-full mx-auto mb-6 md:hidden"></div>
+      <div class="flex items-center gap-3 md:gap-4 mb-6 md:mb-8">
+        <div class="bg-[#00f294]/20 p-2 md:p-3 rounded-xl md:rounded-2xl"><i data-lucide="user" class="text-[#00f294]"></i></div>
+        <h2 class="text-lg md:text-xl font-black uppercase italic text-white tracking-tighter">Configurações</h2>
+      </div>
+
+      <div class="space-y-3 md:space-y-4">
+        <div>
+          <label class="text-[8px] md:text-[9px] font-black uppercase text-gray-500 ml-2 mb-2 block italic">Nome Completo</label>
+          <input type="text" id="edit-name" class="w-full bg-white/5 border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-4 text-white font-bold focus:border-[#00f294] outline-none transition text-xs md:text-sm" placeholder="Seu nome">
+        </div>
+        <div>
+          <label class="text-[8px] md:text-[9px] font-black uppercase text-gray-500 ml-2 mb-2 block italic">Documento CPF</label>
+          <input type="text" id="edit-cpf" class="w-full bg-white/5 border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-4 text-white font-bold focus:border-[#00f294] outline-none transition text-xs md:text-sm" placeholder="000.000.000-00">
+        </div>
+        <div>
+          <label class="text-[8px] md:text-[9px] font-black uppercase text-gray-500 ml-2 mb-2 block italic">Endereço de Entrega</label>
+          <input type="text" id="edit-address" class="w-full bg-white/5 border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-4 text-white font-bold focus:border-[#00f294] outline-none transition text-xs md:text-sm" placeholder="Rua, número, bairro">
+        </div>
+        <div>
+          <label class="text-[8px] md:text-[9px] font-black uppercase text-gray-500 ml-2 mb-2 block italic">Telefone Celular</label>
+          <input type="text" id="edit-phone" class="w-full bg-white/5 border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-4 text-white font-bold focus:border-[#00f294] outline-none transition text-xs md:text-sm" placeholder="(00) 00000-0000">
+        </div>
+
+        <div class="pt-4">
+          <button onclick="saveProfile()" class="w-full bg-[#00f294] text-black font-black py-4 md:py-5 rounded-xl md:rounded-2xl uppercase italic shadow-xl shadow-[#00f294]/10 hover:scale-[1.02] active:scale-95 transition text-xs md:text-sm">
+            Atualizar Meus Dados
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
